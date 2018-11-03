@@ -15,23 +15,25 @@
 ---------------------------------------------------------
 */
 
-class PluginRememberme_ModuleUser_EntitySession extends PluginRememberme_Inherit_ModuleUser_EntitySession {    
+class PluginRememberme_ModuleUser_EntitySession extends PluginRememberme_Inherit_ModuleUser_EntitySession
+{
     /**
-     * Array to store all user sessions    
+     * Array to store all user sessions
      * @var unknown_type
      */
-	protected $aMultiSessionArray = array();	
-	
-	public function addSession(PluginRememberme_ModuleUser_EntitySession $oSession) {		
-		$this->aMultiSessionArray[$oSession->getKey()] = $oSession;			
-	}
-		
-	public function checkUserSessionForMultiplicity() {
-		if (array_key_exists('key',$_COOKIE) && $sKey = $_COOKIE['key']) {			
-			if (array_key_exists($sKey,$this->aMultiSessionArray)) {
-				$this->_aData = $this->aMultiSessionArray[$sKey]->_aData;
-			}
-		}		
-	}
+    protected $aMultiSessionArray = array();
+
+    public function addSession(PluginRememberme_ModuleUser_EntitySession $oSession)
+    {
+        $this->aMultiSessionArray[$oSession->getKey()] = $oSession;
+    }
+
+    public function checkUserSessionForMultiplicity()
+    {
+        if (array_key_exists('key', $_COOKIE) && $sKey = $_COOKIE['key']) {
+            if (array_key_exists($sKey, $this->aMultiSessionArray)) {
+                $this->_aData = $this->aMultiSessionArray[$sKey]->_aData;
+            }
+        }
+    }
 }
-?>

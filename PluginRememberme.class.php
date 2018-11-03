@@ -19,39 +19,43 @@
  * Запрещаем напрямую через браузер обращение к этому файлу.
  */
 if (!class_exists('Plugin')) {
-	die('Hacking attemp!');
+    die('Hacking attemp!');
 }
 
-class PluginRememberme extends Plugin {
-	
-	protected $aInherits=array(    	
-      'module'  =>array('ModuleUser'),         
-      'mapper'  =>array('ModuleUser_MapperUser'),
-	  'entity'  =>array('ModuleUser_EntitySession'),
-	);
-	
-    
-	/**
-	 * Активация плагина.
-	 */
-	public function Activate() {
-		Engine::getInstance()->Cache_Clean();
-		$this->ExportSQL(dirname(__FILE__).'/sql.sql');
-		return true;
-	}
-	/**
-	 * Деактивация плагина.	
-	 */
-	public function Deactivate() {
-		Engine::getInstance()->Cache_Clean();
-		$this->ExportSQL(dirname(__FILE__).'/deactivate.sql');
-		return true;
-	}
-	
-	/**
-	 * Инициализация плагина
-	 */
-	public function Init() {
-	}
+class PluginRememberme extends Plugin
+{
+
+    protected $aInherits = array(
+        'module' => array('ModuleUser'),
+        'mapper' => array('ModuleUser_MapperUser'),
+        'entity' => array('ModuleUser_EntitySession'),
+    );
+
+
+    /**
+     * Активация плагина.
+     */
+    public function Activate()
+    {
+        Engine::getInstance()->Cache_Clean();
+        $this->ExportSQL(dirname(__FILE__) . '/sql.sql');
+        return true;
+    }
+
+    /**
+     * Деактивация плагина.
+     */
+    public function Deactivate()
+    {
+        Engine::getInstance()->Cache_Clean();
+        $this->ExportSQL(dirname(__FILE__) . '/deactivate.sql');
+        return true;
+    }
+
+    /**
+     * Инициализация плагина
+     */
+    public function Init()
+    {
+    }
 }
-?>
