@@ -25,10 +25,7 @@ class PluginRememberme_ModuleUser_MapperUser extends PluginRememberme_Inherit_Mo
         $table = Config::Get('db.table.session');
 
         if (in_array('key', $_COOKIE) && $sKey = $_COOKIE['key']) {
-            $this->oDb->query("
-				DELETE FROM {$table} 
-				WHERE session_key = ?
-			", $sKey);
+            $this->oDb->query("DELETE FROM {$table}	WHERE session_key = ?", $sKey);
         }
 
         return parent::CreateSession($oSession);
@@ -39,7 +36,8 @@ class PluginRememberme_ModuleUser_MapperUser extends PluginRememberme_Inherit_Mo
         $table = Config::Get('db.table.session');
 
         // change condition from user_id to session_key
-        $sql = "UPDATE {$table}
+        $sql = "
+            UPDATE {$table}
 			SET
 				session_ip_last = ? ,
 				session_date_last = ?
@@ -55,7 +53,7 @@ class PluginRememberme_ModuleUser_MapperUser extends PluginRememberme_Inherit_Mo
         // change condition from user_id to session_key
         $sql = "
 			DELETE FROM {$table} 
-				WHERE session_key = ?
+			WHERE session_key = ?
 		";
 
         return $this->oDb->query($sql, $oSession->getKey());
@@ -65,9 +63,11 @@ class PluginRememberme_ModuleUser_MapperUser extends PluginRememberme_Inherit_Mo
     {
         $table = Config::Get('db.table.session');
 
-        $sql = "SELECT count(DISTINCT user_id) as count 
+        $sql = "
+            SELECT count(DISTINCT user_id) as count 
 			FROM {$table} 
 			WHERE session_date_last >= ?";
+
         $result = $this->oDb->selectRow($sql, $sDateActive);
         return $result['count'];
     }

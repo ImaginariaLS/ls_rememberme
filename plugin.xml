@@ -6,10 +6,9 @@
     <author>
         <lang name="default">kpoxas</lang>
     </author>
-    <homepage>http://tetra-studio.com.ua</homepage>
     <version>1.4</version>
     <requires>
-        <livestreet>1.0</livestreet>
+        <livestreet>1.0.5</livestreet>
         <plugins>
 
         </plugins>
